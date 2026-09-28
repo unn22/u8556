@@ -1,0 +1,152 @@
+(function ($WC){
+     //Array.indexOf Polyfill
+    if (!Array.prototype.indexOf) {
+        Array.prototype.indexOf = function (searchElement, fromIndex) {
+            var k; if (this === null) { throw new TypeError('"this" is null or not defined'); }
+            var O = Object(this); var len = O.length >>> 0; if (len === 0) { return -1; }
+            var n = +fromIndex || 0; if (Math.abs(n) === Infinity) { n = 0; }
+            if (n >= len) { return -1; } k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
+            while (k < len) { if (k in O && O[k] === searchElement) { return k; } k++; }
+            return -1;
+        };
+    }
+
+    $WC.languages.pop();
+    var langSwitch = { "en-US": "en", "en-GB": "uk", "en-AU": "uk",
+        "en-NZ": "uk", "en-CA": "uk", "en-ZA": "uk", "fr-FR": "fr",
+        "fr-CA": "fc", "fr-CH": "fr", "zh-CN": "zh", "zh-TW": "tw",
+        "de-AT": "de", "de-DE": "de", "de-LI": "de", "de-CH": "de",
+        "pt-BR": "pt", "pt-PT": "pt", "it-IT": "it", "it-CH": "it",
+        "nb": "no", "es-419": "es", "sh": "sr"
+    },
+
+    language = localStorage.getItem("lang") || (navigator.userLanguage ? navigator.userLanguage : navigator.language);
+
+    if (typeof language !== 'undefined') {
+        language = langSwitch[language] || language;
+        if ($WC.lang !== language && $WC.languages.indexOf(language) !== -1) {
+            $WC.lang = language;
+        }
+    }
+
+    var setSelectPlaceholderColor = function (el) {
+        $(el).toggleClass('select-placeholder', !el.value);
+        $(el).on("change", function () {
+            $(this).toggleClass('select-placeholder', !this.value);
+        });
+    };
+
+    var updateTranslationStrings = function (strs) {
+        if (strs.assistance) {
+            $('#assistance').text(strs.assistance);
+        }
+        if (strs.emailAddress) {
+            $('#User').attr('placeholder', strs.emailAddress);
+        }
+        if (strs.password) {
+            $('#Password').attr('placeholder', strs.password);
+        }
+        if (strs.logon) {
+            $('#Logon').text(strs.logon).append(' <i class="icon-arrow-right icon-large"></i>');
+            $('#SignInHeading').text(strs.logon);
+        }
+        if (strs.createAccount) {
+            $('#createAccountTranslationString').text(strs.createAccount).append(' <i class="icon-arrow-right icon-large"></i>');
+        }
+        if (strs.language) {
+            $('#languageTranslationString').text(strs.language);
+        }
+        if (strs.theme) {
+            $('#themeTranslationString').text(strs.theme);
+        }
+        if (strs.help) {
+            $('#helpTranslation').text(strs.help);
+        }
+        if (strs.forgotPassword) {
+            $("#passwordRecovery").text(strs.forgotPassword);
+        }
+        if (strs.whatsNew) {
+            $("#whatsNewTranslation").text(strs.whatsNew);
+        }
+    },
+
+    init = function () {
+        var form = document.forms[0];
+
+        $("#Lang").on("change", function () {
+            $.ajax({
+                "url": $WC.link + "?&TRANSLATION=1&THEME=" + $WC.theme + "&RETURNJAVASCRIPT=1&Lang=" + ($("#Lang").val() || $WC.lang),
+                "dataType": "json"
+            }).done(function (strs) {
+                updateTranslationStrings(strs);
+            });
+        });
+
+        $("#passwordRecovery").on("click", function () {
+            document.location.href = $WC.link + '?View=PasswordRecovery&Lang=' + ($("#Lang").val() || $WC.lang) + '&User=' + encodeURIComponent(punycode.encodeEmail($("#User").val()));
+        });
+
+        if (document.getElementById('Lang')) {
+            setSelectPlaceholderColor(document.getElementById('Lang'));
+        }
+
+        if (document.getElementById('Theme')) {
+            setSelectPlaceholderColor(document.getElementById('Theme'));
+        }
+
+        try{
+            if (self.parent.frames.length !== 0) {
+                self.parent.location=document.location;
+            }
+            
+            if ($WC.theme && $("#Theme").length > 0) {
+                SetOption('Theme', $WC.theme);
+                $("#Theme").change();
+            }
+            if ($WC.lang && $("#Lang").length > 0) {
+                SetOption('Lang', $WC.lang);
+                $("#Lang").change();
+            }
+            
+            if (form.User.value.length > 0) {
+                form.User.value = punycode.decodeEmail(form.User.value);
+                form.Password.focus();
+            }
+            else {
+                form.User.focus();
+            }
+        }
+        catch(exception){}
+
+        if (localStorage) {
+            var savedTheme = localStorage.getItem("theme"), savedLang = localStorage.getItem("lang");
+            if (savedTheme !== null && /^[A-Za-z0-9]+$/.test(savedTheme)) {
+                $("#Theme").val(savedTheme).change();
+            }
+            else {
+                localStorage.removeItem("theme");
+            }
+        }
+
+        form.onsubmit = function () {
+            if (localStorage) {
+                if ($("#Theme").length > 0 && savedTheme !== $("#Theme").val()) {
+                    localStorage.setItem("theme", $("#Theme").val());
+                }
+                if ($("#Lang").length > 0 && savedLang !== $("#Lang").val()) {
+                    localStorage.setItem("lang", $("#Lang").val());
+                }
+            }
+            
+            form.User.value = punycode.encodeEmail(form.User.value);
+            
+            if (form.User.value !== GetCookie("User")) {
+                SetCookie("User", form.User.value);
+            }
+        };
+    };
+
+    $(document).ready(function () {
+        init();
+    });
+}($WC));
